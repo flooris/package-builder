@@ -9,4 +9,4 @@ docker run --rm \
   -v "$PWD":/usr/src/app \
   -w /usr/src/app \
   "${node_image}" \
-  sh -c "mkdir -p /tmp/bin && corepack enable --install-directory /tmp/bin && export PATH=\"/tmp/bin:\$PATH\" && yarn && yarn run \"$1\""
+  sh -c "echo \"[flooris-package-builder] User ID: \$(id -u), Group ID: \$(id -g)\" && mkdir -p /tmp/bin && corepack enable --install-directory /tmp/bin && export PATH=\"/tmp/bin:\$PATH\" && yarn && yarn run \"$1\" && echo \"[flooris-package-builder] Build completed successfully.\""

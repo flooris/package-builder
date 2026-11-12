@@ -27,4 +27,4 @@ docker run --rm \
   -v "$PWD":/usr/src/app \
   -w /usr/src/app \
   "${node_image}" \
-  sh -c "echo \"[flooris-package-builder] User ID: \$(id -u), Group ID: \$(id -g)\" && mkdir -p /tmp/bin && corepack enable --install-directory /tmp/bin && export PATH=\"/tmp/bin:\$PATH\" && yarn && yarn run \"$1\" && echo \"[flooris-package-builder] Build completed successfully.\""
+  sh -c "echo \"[flooris-package-builder] User ID: \$(id -u), Group ID: \$(id -g)\" && mkdir -p /tmp/bin && { command -v corepack >/dev/null 2>&1 || { npm install --global --prefix /tmp/npm corepack >/dev/null && export PATH=\"/tmp/npm/bin:\$PATH\"; }; } && corepack enable --install-directory /tmp/bin && export PATH=\"/tmp/bin:\$PATH\" && yarn && yarn run \"$1\" && echo \"[flooris-package-builder] Build completed successfully.\""
